@@ -21,8 +21,8 @@ export default function SigninGoogleButton() {
       className="w-full py-5"
       onClick={handleSignIn}
     >
-      <Icons.google className="mr-2 h-4 w-4" />
-      Login with Google
+      <Icons.google className="mr-2 h-4 w-4 text-red-600" />
+      Google
     </Button>
   );
 }
