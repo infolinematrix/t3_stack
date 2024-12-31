@@ -1,6 +1,7 @@
 "use client";
 import { signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button";
+import { PowerOff } from "lucide-react";
 
 export default function SignOutButton() {
   const handleSignOut = async () => {
@@ -13,8 +14,8 @@ export default function SignOutButton() {
     }
   };
   return (
-    <Button size="sm" variant={"link"} onClick={handleSignOut}>
-      Sign out
+    <Button variant={"ghost"} onClick={handleSignOut}>
+      <PowerOff /> Sign out
     </Button>
   );
 }

@@ -31,6 +31,7 @@ import { User2 } from "lucide-react";
 import { signOut } from "@/server/auth";
 import Login from "@/app/(auth)/signin/page";
 import SigninPopup from "@/app/(auth)/_components/signinPopup";
+import { UserRole } from "@/server/auth/roles";
 
 interface AuthDropdownProps
   extends React.ComponentPropsWithRef<typeof DropdownMenuTrigger>,
@@ -42,7 +43,7 @@ export function UserDropdownMenu({ className, ...props }: AuthDropdownProps) {
   return {
     ...(props.user ? (
       <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-        <AuthDropdownGroup user />
+        <AuthDropdownGroup user={props.user} />
       </div>
     ) : (
       <GuestDropDownMenu />
@@ -59,17 +60,24 @@ function AuthDropdownGroup({ user }: any) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuLabel>
+          My Account
+          <div className="text-muted-foreground text-xs font-light">{`${user.name}`}</div>
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
+
         <DropdownMenuGroup>
-          <DropdownMenuItem>
-            Profile
-            <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            Billing
-            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-          </DropdownMenuItem>
+          {user.role === UserRole.Admin ? (
+            <DropdownMenuItem>
+              <Link href="/admin" scroll={true}>
+                Administration
+              </Link>
+              <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+            </DropdownMenuItem>
+          ) : (
+            <></>
+          )}
+
           <DropdownMenuItem>
             Settings
             <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>

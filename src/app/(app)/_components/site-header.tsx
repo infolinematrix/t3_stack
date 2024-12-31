@@ -41,7 +41,9 @@ export async function SiteHeader() {
                   <span className="sr-only">User</span>
                 </Link>
               </Button> */}
-              <UserDropdownMenu user={session?.user} />
+
+              {session && <UserDropdownMenu user={session?.user!} />}
+
               <ModeSwitcher />
             </nav>
           </div>

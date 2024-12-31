@@ -6,7 +6,8 @@ import { LatestPost } from "./_components/post";
 
 export default async function Home() {
   // const hello = await api.post.hello({ text: "from tRPC" });
-  // const session = await auth();
+  const session = await auth();
+  console.log("User----------", session?.user.role);
 
   // if (session?.user) {
   //   void api.post.getLatest.prefetch();

@@ -122,6 +122,8 @@ body {
   }
 }
 
+
+
 @supports (font: -apple-system-body) and (-webkit-appearance: none) {
   [data-wrapper] {
     @apply min-[1800px]:border-t;
