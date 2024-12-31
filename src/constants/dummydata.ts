@@ -24,6 +24,7 @@ export const salesData = [
     email: "sofia.davis@email.com",
     amount: "+$39.00",
   },
+  
 ];
 
 export const overviewChartData = [

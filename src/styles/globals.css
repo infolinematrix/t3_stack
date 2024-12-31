@@ -127,29 +127,25 @@ body {
     @apply min-[1800px]:border-t;
   }
 }
-
-::selection {
-  background-color: hsl(var(--primary));
-  color: hsl(var(--background));
-}
-
+/* width */
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 2px;
 }
 
+/* Track */
 ::-webkit-scrollbar-track {
-  background-color: hsl(var(--background));
-  border-radius: 10px;
+  background: #f1f1f1;
 }
 
+/* Handle */
 ::-webkit-scrollbar-thumb {
-  background-color: hsl(var(--primary));
-  border-radius: 10px;
+  background: #888;
+  border-radius: 2px;
 }
 
+/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--primary) / 50);
+  background: #888;
 }
 
 /* @layer base {

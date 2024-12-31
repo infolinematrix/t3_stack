@@ -1,5 +1,3 @@
-
-
 import React, { type ReactNode } from "react";
 
 import {
@@ -29,13 +27,12 @@ interface LayoutProps {
 }
 
 export default async function Layout({ children }: LayoutProps) {
-
   const session = await auth();
-  if (!session ) return redirect("/signin");
-  // if( session.user.role != UserRole.Admin) return redirect("/signin");
-  
+  // if (!session) return redirect("/signin");
+  // if (session.user.role != UserRole.Admin) return redirect("/signin");
+
   return (
-    <main>
+    <div className="bg-slate-50">
       <NextAuthProvider>
         <SidebarProvider>
           <AppSidebar />
@@ -58,10 +55,10 @@ export default async function Layout({ children }: LayoutProps) {
                 </Breadcrumb>
               </div>
             </header>
-            <div className="min-h-svh bg-slate-50 p-4">{children}</div>
+            <div className="min-h-svh p-4">{children}</div>
           </SidebarInset>
         </SidebarProvider>
       </NextAuthProvider>
-    </main>
+    </div>
   );
 }

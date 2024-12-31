@@ -15,6 +15,10 @@ If you are not familiar with the different technologies used in this project, pl
 - [Tailwind CSS](https://tailwindcss.com)
 - [tRPC](https://trpc.io)
 
+## Admn (/admin)?
+
+- [Admin Sidebar] : /src/app/admin/\_componenets/sidebarItems.tsx
+
 Subha Sundar Das
 Siliguri, India
 infolinematrix@gmail.com

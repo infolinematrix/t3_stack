@@ -47,6 +47,17 @@ export const sidebarItems: NavGroup[] = [
     label: "Apps & Pages",
     items: [
       {
+        title: "Users",
+        path: `#`,
+        icon: Inbox,
+        subItems:[
+          { title: "All", path: `${basePath}/user` },
+          { title: "Active", path: `${basePath}/user` },
+          { title: "Inactive", path: `${basePath}/user` },
+          { title: "Suspended", path: `${basePath}/user` },
+        ]
+      },
+      {
         title: "Inbox",
         path: `${basePath}/inbox`,
         icon: Inbox,
