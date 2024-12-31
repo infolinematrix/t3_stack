@@ -1,4 +1,3 @@
-
 import { z } from "zod";
 
 import {
@@ -9,9 +8,6 @@ import {
 
 import { posts } from "@/server/db/schema/user";
 
-
-
-
 export const postRouter = createTRPCRouter({
   hello: publicProcedure
     .input(z.object({ text: z.string() }))
@@ -21,15 +17,14 @@ export const postRouter = createTRPCRouter({
       };
     }),
 
-    getLatest: protectedProcedure.query( async ({ctx}) => {
-      const allPost = await ctx.db.query.posts.findMany({
-        orderBy: (posts, { desc }) => [desc(posts.createdAt)],
-      });
+  getLatest: protectedProcedure.query(async ({ ctx }) => {
+    const allPost = await ctx.db.query.posts.findMany({
+      orderBy: (posts, { desc }) => [desc(posts.createdAt)],
+    });
 
-      return allPost ?? null
-    }),
-  
- 
+    return allPost ?? null;
+  }),
+
   create: protectedProcedure
     .input(z.object({ name: z.string().min(1) }))
     .mutation(async ({ ctx, input }) => {
@@ -38,8 +33,6 @@ export const postRouter = createTRPCRouter({
         createdById: ctx.session.user.id,
       });
     }),
-
- 
 
   getSecretMessage: protectedProcedure.query(() => {
     return "you can now see this secret message!";
