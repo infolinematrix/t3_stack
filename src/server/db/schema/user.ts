@@ -12,7 +12,7 @@ import {
 import { type AdapterAccount } from "next-auth/adapters";
 import { lifecycleDates } from "../utils";
 import { UserRole } from "@/server/auth/roles";
-
+import { Status } from "@/constants/constants";
 
 /**
  * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
@@ -30,20 +30,21 @@ export const posts = pgTable(
     createdById: varchar("created_by", { length: 255 })
       .notNull()
       .references(() => users.id),
+
     createdAt: timestamp("created_at", { withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
-      () => new Date()
+      () => new Date(),
     ),
   },
-  (example) => ({
-    createdByIdIdx: index("created_by_idx").on(example.createdById),
-    nameIndex: index("name_idx").on(example.name),
-  })
+  (example) => [
+    {
+      createdByIdIdx: index("created_by_idx").on(example.createdById),
+      nameIndex: index("name_idx").on(example.name),
+    },
+  ],
 );
-
-
 
 export const users = pgTable("user", {
   id: varchar("id", { length: 255 })
@@ -57,9 +58,19 @@ export const users = pgTable("user", {
     withTimezone: true,
   }).default(sql`CURRENT_TIMESTAMP`),
   image: varchar("image", { length: 255 }),
-  role: varchar("role", { length: 25 }).$type<UserRole>().default(UserRole.Guest),
+  role: varchar("role", { length: 25 })
+    .$type<UserRole>()
+    .default(UserRole.Guest),
 
-  ...lifecycleDates
+  status: varchar("status", { length: 25 })
+    .$type<Status>()
+    .default(Status.Active),
+  country: varchar("country", { length: 100 }),
+  state: varchar("state", { length: 100 }),
+  city: varchar("city", { length: 100 }),
+  pincode: varchar("pincode", { length: 10 }),
+
+  ...lifecycleDates,
 });
 
 export const usersRelations = relations(users, ({ many }) => ({
@@ -87,12 +98,14 @@ export const accounts = pgTable(
     id_token: text("id_token"),
     session_state: varchar("session_state", { length: 255 }),
   },
-  (account) => ({
-    compoundKey: primaryKey({
-      columns: [account.provider, account.providerAccountId],
-    }),
-    userIdIdx: index("account_user_id_idx").on(account.userId),
-  })
+  (account) => [
+    {
+      compoundKey: primaryKey({
+        columns: [account.provider, account.providerAccountId],
+      }),
+      userIdIdx: index("account_user_id_idx").on(account.userId),
+    },
+  ],
 );
 
 export const accountsRelations = relations(accounts, ({ one }) => ({
@@ -113,9 +126,11 @@ export const sessions = pgTable(
       withTimezone: true,
     }).notNull(),
   },
-  (session) => ({
-    userIdIdx: index("session_user_id_idx").on(session.userId),
-  })
+  (session) => [
+    {
+      userIdIdx: index("session_user_id_idx").on(session.userId),
+    },
+  ],
 );
 
 export const sessionsRelations = relations(sessions, ({ one }) => ({
@@ -132,7 +147,9 @@ export const verificationTokens = pgTable(
       withTimezone: true,
     }).notNull(),
   },
-  (vt) => ({
-    compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
-  })
+  (vt) => [
+    {
+      compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
+    },
+  ],
 );

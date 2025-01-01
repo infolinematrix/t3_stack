@@ -8,6 +8,8 @@ import { META_THEME_COLORS } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
+import { Suspense } from "react";
+import NextTopLoader from "nextjs-toploader";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -35,6 +37,7 @@ export default function RootLayout({
       </head>
 
       <body className={cn("min-h-svh font-sans antialiased")}>
+        <NextTopLoader />
         <TRPCReactProvider>{children}</TRPCReactProvider>
         <TailwindIndicator />
       </body>

@@ -1,3 +1,5 @@
+const delay = (s: any) => new Promise((resolve) => setTimeout(resolve, s));
+
 export function formatDate(
   date: Date | string | number,
   opts: Intl.DateTimeFormatOptions = {},

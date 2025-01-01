@@ -7,15 +7,18 @@ import {
   CardDescription,
   CardFooter,
 } from "@/components/ui/card";
+// import { api } from "@/trpc/react";
 import { api, HydrateClient } from "@/trpc/server";
 import { User2 } from "lucide-react";
+import UpdateUserForm from "../../_components/form/UpdateUser";
+import FeedbackForm from "../../_components/FeedbackForm";
 
 interface Props {
   params: { userId: string };
 }
-
 export default async function UserPage({ params }: Props) {
-  const user = await api.user.getUser({ userId: params.userId });
+  const { userId } = await params;
+  const user = await api.user.getUser({ userId: userId });
 
   if (!user) return <>No Data Found </>;
 
@@ -44,7 +47,9 @@ export default async function UserPage({ params }: Props) {
                       </div>
                     </header>
                   </CardHeader>
-                  <CardContent>{params.userId}</CardContent>
+                  <CardContent>
+                    <UpdateUserForm user={user} />
+                  </CardContent>
                 </Card>
               </div>
               <div className="col-span-3 hidden xl:block">{rightPanel()}</div>
@@ -58,16 +63,6 @@ export default async function UserPage({ params }: Props) {
 
 const rightPanel = () => {
   return (
-    <Card className="w-full">
-      <CardHeader>
-        <CardTitle>Create project</CardTitle>
-        <CardDescription>Deploy your new project in one-click.</CardDescription>
-      </CardHeader>
-      <CardContent>sdas</CardContent>
-      <CardFooter className="flex justify-between">
-        <Button variant="outline">Cancel</Button>
-        <Button>Deploy</Button>
-      </CardFooter>
-    </Card>
+    <FeedbackForm/>
   );
 };

@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { api } from "@/trpc/react";
 
 export function AdminThemeProvider({
   children,

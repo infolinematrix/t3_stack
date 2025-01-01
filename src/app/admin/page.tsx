@@ -11,6 +11,7 @@ import {
 import { salesData } from "@/constants/dummydata";
 import { auth } from "@/server/auth";
 import { Activity, CreditCard, DollarSign, Users } from "lucide-react";
+import { ChartBar } from "./_components/chartBar";
 
 export default async function Dashboard() {
   
@@ -30,7 +31,7 @@ export default async function Dashboard() {
           </div>
         </header>
 
-        <div className="space-y-4">
+        <div className="space-y-5">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -101,39 +102,14 @@ export default async function Dashboard() {
               </CardContent>
             </Card>
           </div>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-            <Card className="col-span-2 lg:col-span-4">
-              <CardHeader>
-                <CardTitle>Overview</CardTitle>
-              </CardHeader>
-              <CardContent className="pl-2">
-                {/* <ResponsiveContainer width="100%" height={350}>
-                  <BarChart data={overviewChartData}>
-                    <XAxis
-                      dataKey="name"
-                      stroke="#888888"
-                      fontSize={12}
-                      tickLine={false}
-                      axisLine={false}
-                    />
-                    <YAxis
-                      stroke="#888888"
-                      fontSize={12}
-                      tickLine={false}
-                      axisLine={false}
-                      tickFormatter={(value) => `$${value}`}
-                    />
-                    <Bar
-                      dataKey="total"
-                      fill="currentColor"
-                      radius={[4, 4, 0, 0]}
-                      className="fill-primary"
-                    />
-                  </BarChart>
-                </ResponsiveContainer> */}
-              </CardContent>
-            </Card>
-            <Card className="col-span-2 lg:col-span-3">
+          
+          
+          
+          <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-7">
+            <div className="col-span-3 lg:col-span-3">
+              <ChartBar/>
+            </div>
+            <Card className="col-span-3 lg:col-span-4">
               <CardHeader>
                 <CardTitle>Recent Sales</CardTitle>
                 <CardDescription>
@@ -162,8 +138,11 @@ export default async function Dashboard() {
               </CardContent>
             </Card>
           </div>
+
+
         </div>
       </div>
     </div>
   );
 }
+

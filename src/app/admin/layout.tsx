@@ -21,6 +21,7 @@ import { NextAuthProvider } from "@/components/next-auth-provider";
 import { auth } from "@/server/auth";
 import { redirect } from "next/navigation";
 import { UserRole } from "@/server/auth/roles";
+import { Toaster } from "@/components/ui/toaster";
 
 interface LayoutProps {
   readonly children: ReactNode;
@@ -41,7 +42,6 @@ export default async function Layout({ children }: LayoutProps) {
               <div className="flex items-center gap-2 px-4">
                 <SidebarTrigger className="-ml-1" />
                 <Separator orientation="vertical" className="mr-2 h-4" />
-
                 <Breadcrumb>
                   <BreadcrumbList>
                     <BreadcrumbItem className="hidden md:block">
@@ -59,6 +59,7 @@ export default async function Layout({ children }: LayoutProps) {
           </SidebarInset>
         </SidebarProvider>
       </NextAuthProvider>
+      <Toaster />
     </div>
   );
 }

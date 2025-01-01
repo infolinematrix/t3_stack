@@ -7,12 +7,9 @@ import { api } from "@/trpc/react";
 export function LatestPost() {
   const [latestPost] = api.post.getLatest.useSuspenseQuery();
 
-
-  
   const utils = api.useUtils();
   const [name, setName] = useState("");
-  
-  
+
   const createPost = api.post.create.useMutation({
     onSuccess: async () => {
       await utils.post.invalidate();
@@ -23,8 +20,8 @@ export function LatestPost() {
   return (
     <div className="w-full max-w-xs">
       {latestPost ? (
-        latestPost.map((p)=>{
-          return(<p key={p.id}>{p.name}</p>)
+        latestPost.map((p) => {
+          return <p key={p.id}>{p.name}</p>;
         })
       ) : (
         <p>You have no posts yet.</p>
